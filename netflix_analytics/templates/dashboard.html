@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="dashboard">
+    <h2 class="slide-in-left">Netflix Analytics Charts</h2>
+    <div class="charts-grid">
+        {% for chart in charts %}
+        <div class="chart-card zoom-in">
+            <img src="{{ url_for('image', filename=chart) }}" alt="{{ chart }}">
+            <div class="caption">{{ chart.replace('_', ' ').replace('.png', '').title() }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
