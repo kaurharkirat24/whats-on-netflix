@@ -1,28 +1,41 @@
 🎬 Whats-On-Netflix
 "Because data is the new blockbuster."
 
-Ever wondered what’s really trending on Netflix?
-Whats-On-Netflix is an interactive analytics dashboard that takes Netflix’s massive content library and turns it into visual stories.
-With a Flask-powered backend, a Netflix-inspired HTML/CSS UI, and Matplotlib visualizations, this project blends design, storytelling, and analytics into one binge-worthy experience.
+Ever wondered what’s trending, timeless, or hidden in Netflix’s massive content library?
+Whats-On-Netflix is your personal analytics dashboard that turns Netflix data into visual stories.
+With a Flask-powered backend, a Netflix-inspired HTML/CSS frontend, and Matplotlib-powered visualizations, it lets you explore genre trends, release patterns, country-specific content, and audience ratings — all in one binge-worthy interface.
 
-📊 Features
-📈 Genre Popularity Analysis – See which genres dominate Netflix globally.
+🚀 Features
 
-🗓 Release Year Trends – Spot the golden years of Netflix content production.
+📈 Genre Popularity Analysis – Discover which genres dominate Netflix.
 
-🌍 Country-Based Insights – Discover which countries contribute the most content.
+🗓 Release Year Trends – Spot the golden years of content production.
+
+🌍 Country-Based Insights – See which countries contribute the most titles.
 
 ⭐ Rating Distribution – Explore how Netflix titles score with audiences.
 
-🎨 Netflix-Style Frontend – Styled UI inspired by Netflix’s iconic design.
+🎨 Netflix-Inspired Design – UI modeled after the iconic Netflix look.
 
-⚡ Flask Backend – Fast and responsive data-driven web app.
+⚡ Flask-Powered Backend – Fast, responsive, and data-driven.
 
 🛠 Tech Stack
+
 Backend: Flask (Python)
 
-Frontend: HTML, CSS (Netflix-inspired theme)
+Frontend: HTML, CSS (Netflix-themed)
 
 Data Visualization: Matplotlib
 
-Dataset: Netflix Titles Dataset (Kaggle)
+📢Future Enhancements
+
+✅ Interactive visualizations (Plotly / Chart.js)
+
+✅ Search and filter by genre/year
+
+✅ Recommendation engine for similar titles
+
+💡 About the Project
+
+This project is part of my portfolio to demonstrate full-stack development + data analytics skills. It merges backend logic, frontend design, and visualization to create a product-like experience for exploring real-world datasets.
+Dataset: Netflix Titles Dataset – Kaggle
