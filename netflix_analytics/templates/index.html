@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="landing">
+    <!-- Background overlay and Netflix-style gradient -->
+    <div class="landing-bg-overlay"></div>
+    <!-- Semi-transparent background image -->
+    <div class="landing-bg-image" data-bg="{{ url_for('static', filename='images/netflix-background-image.jpg') }}"></div>
+    <div class="landing-main-content">
+        <img src="{{ url_for('static', filename='images/netflix_logo.png') }}" alt="Whats-On-Netflix Logo" class="landing-logo fade-in"/>
+        <h1 class="landing-title fade-in delay-1">Whats-On-Netflix</h1>
+        <p class="landing-tagline fade-in delay-2">Your visual guide to Netflix's global catalog</p>
+        <a class="btn pulse fade-in delay-3" href="/dashboard">Explore Analytics</a>
+    </div>
+</section>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var bgDiv = document.querySelector('.landing-bg-image');
+    if (bgDiv && bgDiv.dataset.bg) {
+      bgDiv.style.backgroundImage = "url('" + bgDiv.dataset.bg + "')";
+    }
+  });
+</script>
+{% endblock %}

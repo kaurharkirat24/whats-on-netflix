@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="story-dashboard">
+    <h2 class="dashboard-title">Netflix Story Analytics</h2>
+    {% for insight in insights %}
+    <div class="analytics-block fade-in">
+        <img src="{{ url_for('image', filename=insight.file) }}" alt="{{ insight.title }}" class="chart-img"/>
+        <div class="chart-info">
+            <h3>{{ insight.title }}</h3>
+            <p class="stat-summary">{{ insight.caption }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+{% endblock %}
