@@ -1,15 +1,157 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="story-dashboard">
-    <h2 class="dashboard-title">Netflix Story Analytics</h2>
-    {% for insight in insights %}
-    <div class="analytics-block fade-in">
-        <img src="{{ url_for('image', filename=insight.file) }}" alt="{{ insight.title }}" class="chart-img"/>
-        <div class="chart-info">
-            <h3>{{ insight.title }}</h3>
-            <p class="stat-summary">{{ insight.caption }}</p>
+
+<!-- ── Filter Bar ──────────────────────────────────────── -->
+<div class="filter-bar">
+    <div class="filter-bar-inner">
+        <div class="filter-label">Filter charts:</div>
+        <div class="filter-group">
+            <button class="filter-btn active" data-type="all">All</button>
+            <button class="filter-btn" data-type="Movie">Movies</button>
+            <button class="filter-btn" data-type="TV Show">TV Shows</button>
         </div>
+        <div class="filter-divider"></div>
+        <div class="filter-summary" id="filter-summary">Loading…</div>
     </div>
-    {% endfor %}
+</div>
+
+<!-- ── KPI Strip ───────────────────────────────────────── -->
+<section class="kpi-strip">
+    <div class="kpi-card"><div class="kpi-card-num" id="s-total">—</div><div class="kpi-card-label">Total Titles</div></div>
+    <div class="kpi-card"><div class="kpi-card-num" id="s-movies">—</div><div class="kpi-card-label">Movies</div></div>
+    <div class="kpi-card"><div class="kpi-card-num" id="s-shows">—</div><div class="kpi-card-label">TV Shows</div></div>
+    <div class="kpi-card"><div class="kpi-card-num" id="s-countries">—</div><div class="kpi-card-label">Countries</div></div>
+    <div class="kpi-card"><div class="kpi-card-num" id="s-avg">—</div><div class="kpi-card-label">Avg Movie (min)</div></div>
 </section>
+
+<!-- ── Dashboard Title ──────────────────────────────────── -->
+<div class="dash-header">
+    <h1 class="dash-title">Netflix Analytics</h1>
+    <p class="dash-sub">Interactive data stories from Netflix's global catalog</p>
+</div>
+
+<!-- ── Charts Grid ─────────────────────────────────────── -->
+<section class="charts-grid">
+
+    <div class="chart-block wide" id="block-trend">
+        <div class="chart-block-header">
+            <h3>Content Growth Over Time</h3>
+            <p>See how Netflix's catalog exploded post-2015, and how Movies vs TV Shows have evolved year by year.</p>
+        </div>
+        <div id="chart-trend" class="chart-area"></div>
+    </div>
+
+    <div class="chart-block" id="block-type">
+        <div class="chart-block-header">
+            <h3>Movies vs TV Shows</h3>
+            <p>The overall split of Netflix's content library.</p>
+        </div>
+        <div id="chart-type" class="chart-area"></div>
+    </div>
+
+    <div class="chart-block" id="block-ratings">
+        <div class="chart-block-header">
+            <h3>Content Ratings</h3>
+            <p>How Netflix titles are rated by audience suitability.</p>
+        </div>
+        <div id="chart-ratings" class="chart-area"></div>
+    </div>
+
+    <div class="chart-block wide" id="block-genres">
+        <div class="chart-block-header">
+            <h3>Top Genres</h3>
+            <p>Drama and International Movies dominate — but the long tail is rich.</p>
+        </div>
+        <div id="chart-genres" class="chart-area"></div>
+    </div>
+
+    <div class="chart-block wide" id="block-countries">
+        <div class="chart-block-header">
+            <h3>Top Countries by Output</h3>
+            <p>The US leads but India, UK and Canada are closing the gap.</p>
+        </div>
+        <div id="chart-countries" class="chart-area"></div>
+    </div>
+
+    <div class="chart-block wide" id="block-duration">
+        <div class="chart-block-header">
+            <h3>Average Movie Duration Over Time</h3>
+            <p>Movies have been getting shorter — catering to modern attention spans.</p>
+        </div>
+        <div id="chart-duration" class="chart-area"></div>
+    </div>
+
+    <div class="chart-block" id="block-seasonal">
+        <div class="chart-block-header">
+            <h3>When Does Netflix Add Titles?</h3>
+            <p>July and December peak — aligned with holidays and summer breaks.</p>
+        </div>
+        <div id="chart-seasonal" class="chart-area"></div>
+    </div>
+
+    <div class="chart-block" id="block-directors">
+        <div class="chart-block-header">
+            <h3>Most Prolific Directors</h3>
+            <p>Frequent collaborators behind Netflix's biggest volumes.</p>
+        </div>
+        <div id="chart-directors" class="chart-area"></div>
+    </div>
+
+    <div class="chart-block wide" id="block-rating-trends">
+        <div class="chart-block-header">
+            <h3>Content Rating Trends Over Time</h3>
+            <p>TV-MA content has surged — Netflix's bold shift toward mature themes is unmistakable.</p>
+        </div>
+        <div id="chart-rating-trends" class="chart-area"></div>
+    </div>
+
+    <div class="chart-block wide" id="block-dur-country">
+        <div class="chart-block-header">
+            <h3>Average Movie Duration by Country</h3>
+            <p>Only countries with 10+ titles shown. Cultural storytelling traditions shape runtime.</p>
+        </div>
+        <div id="chart-dur-country" class="chart-area"></div>
+    </div>
+
+</section>
+
+<!-- ── Search & Explore ─────────────────────────────────── -->
+<section class="search-section" id="search">
+    <div class="search-header">
+        <h2>Explore Titles</h2>
+        <p>Search by title, actor, director, or description. Filter by genre, type, rating, and year.</p>
+    </div>
+    <div class="search-controls">
+        <input class="search-input" id="search-q" type="text" placeholder="Search titles, actors, directors…" />
+        <select class="search-select" id="search-type">
+            <option value="">All Types</option>
+            <option value="Movie">Movie</option>
+            <option value="TV Show">TV Show</option>
+        </select>
+        <select class="search-select" id="search-genre"></select>
+        <select class="search-select" id="search-rating"></select>
+        <div class="year-range">
+            <input type="number" class="year-input" id="year-from" placeholder="From year" min="1940" max="2023"/>
+            <span>–</span>
+            <input type="number" class="year-input" id="year-to" placeholder="To year" min="1940" max="2023"/>
+        </div>
+        <button class="btn-search" id="btn-search">Search</button>
+        <button class="btn-clear" id="btn-clear">Clear</button>
+    </div>
+    <div class="search-result-meta" id="search-meta"></div>
+    <div class="results-table-wrap">
+        <table class="results-table" id="results-table">
+            <thead>
+                <tr>
+                    <th>Title</th><th>Type</th><th>Year</th><th>Rating</th>
+                    <th>Country</th><th>Genres</th><th>Duration</th>
+                </tr>
+            </thead>
+            <tbody id="results-body"></tbody>
+        </table>
+        <div class="empty-state" id="empty-state">Enter a search query above to explore Netflix titles.</div>
+    </div>
+</section>
+
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 {% endblock %}

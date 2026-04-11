@@ -1,31 +1,63 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="about-section">
-    <h2>About Whats-On-Netflix</h2>
-    <p>
-        Whats-On-Netflix is a data analytics project designed to provide insightful visualizations and trends from Netflix's extensive content library worldwide. Our goal is to help viewers explore streaming trends—covering movies and TV shows, their ratings, durations, and country distributions—in an engaging and interactive way.
-    </p>
-
-    <h3>Project Highlights</h3>
-    <ul>
-        <li>Cleaned and analyzed Netflix titles data for meaningful insights.</li>
-        <li>Visualized content types, release trends, duration distributions, and ratings.</li>
-        <li>Implemented an animated, Netflix-inspired web interface for smooth user experience.</li>
-        <li>Built with Python, Flask, Pandas, Matplotlib, HTML, CSS, and JavaScript.</li>
-    </ul>
-
-    <h3>Technology & Skills</h3>
-    <div class="skills-icons">
-        <div class="skill-item">🐍 Python</div>
-        <div class="skill-item">🍶 Flask</div>
-        <div class="skill-item">📊 Pandas & Matplotlib</div>
-        <div class="skill-item">🎨 HTML & CSS</div>
-        <div class="skill-item">✨ JavaScript & Animations</div>
+<section class="about-wrap">
+    <div class="about-hero">
+        <div class="eyebrow"><span class="eyebrow-dot"></span>Portfolio Project</div>
+        <h1>About the Project</h1>
+        <p class="about-lead">Whats-On-Netflix turns a raw CSV into a living, interactive data product — combining backend analytics, REST APIs, and a Netflix-inspired frontend.</p>
     </div>
 
-    <h3>Contact & Links</h3>
-    <p>Have questions or want to collaborate? Feel free to reach out!</p>
-    <p>GitHub: <a href="https://github.com/kaurharkirat24" target="_blank" rel="noopener">github.com/kaurharkirat24</a></p>
-    <p>LinkedIn: <a href="http://linkedin.com/in/harkiratkaur24" target="_blank" rel="noopener">linkedin.com/in/harkiratkaur24</a></p>
+    <div class="about-grid">
+        <div class="about-card">
+            <div class="about-card-icon">📊</div>
+            <h3>What it does</h3>
+            <p>Analyzes Netflix's global catalog across 8,800+ titles. Surfaces genre trends, country distributions, rating breakdowns, release patterns, and duration trends — all driven by a live Python/Flask API.</p>
+        </div>
+        <div class="about-card">
+            <div class="about-card-icon">🔧</div>
+            <h3>How it's built</h3>
+            <p>Flask serves 12+ REST API endpoints. Pandas handles all data cleaning and aggregation. Plotly.js renders fully interactive charts in the browser. Everything is dynamically filtered — no static images.</p>
+        </div>
+        <div class="about-card">
+            <div class="about-card-icon">🧠</div>
+            <h3>Key technical decisions</h3>
+            <p>API-first architecture separates data logic from presentation. Country data is properly cleaned (first country only, min. 10 titles). Charts respond to a global content-type filter in real time.</p>
+        </div>
+        <div class="about-card">
+            <div class="about-card-icon">🔍</div>
+            <h3>Search & Explore</h3>
+            <p>Full-text search across titles, cast, directors, and descriptions. Multi-filter support: genre, type, rating, year range. Returns top 50 results with instant feedback.</p>
+        </div>
+    </div>
+
+    <div class="tech-section">
+        <h2>Tech Stack</h2>
+        <div class="tech-grid">
+            <div class="tech-item"><span class="tech-icon">🐍</span><span class="tech-name">Python 3</span></div>
+            <div class="tech-item"><span class="tech-icon">🍶</span><span class="tech-name">Flask</span></div>
+            <div class="tech-item"><span class="tech-icon">🐼</span><span class="tech-name">Pandas</span></div>
+            <div class="tech-item"><span class="tech-icon">📈</span><span class="tech-name">Plotly.js</span></div>
+            <div class="tech-item"><span class="tech-icon">🎨</span><span class="tech-name">CSS3</span></div>
+            <div class="tech-item"><span class="tech-icon">⚡</span><span class="tech-name">JavaScript</span></div>
+        </div>
+    </div>
+
+    <div class="links-section">
+        <h2>Links</h2>
+        <div class="links-row">
+            <a href="https://github.com/kaurharkirat24" target="_blank" rel="noopener" class="link-card">
+                <span>GitHub</span>
+                <span class="link-arrow">→</span>
+            </a>
+            <a href="http://linkedin.com/in/harkiratkaur24" target="_blank" rel="noopener" class="link-card">
+                <span>LinkedIn</span>
+                <span class="link-arrow">→</span>
+            </a>
+            <a href="https://www.kaggle.com/datasets/shivamb/netflix-shows" target="_blank" rel="noopener" class="link-card">
+                <span>Dataset (Kaggle)</span>
+                <span class="link-arrow">→</span>
+            </a>
+        </div>
+    </div>
 </section>
 {% endblock %}

@@ -2,25 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Whats-On-Netflix</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
 </head>
 <body>
     <nav class="navbar">
-        <div class="logo">Whats-On-<span style="color:red;">Netflix</span></div>
+        <div class="logo">WHATS-ON-<span>NETFLIX</span></div>
         <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/dashboard">Analytics</a></li>
-            <li><a href="/about">About</a></li>
+            <li><a href="/" id="nav-home">Home</a></li>
+            <li><a href="/dashboard" id="nav-dash">Analytics</a></li>
+            <li><a href="/dashboard#search" id="nav-search">Explore</a></li>
+            <li><a href="/about" id="nav-about">About</a></li>
         </ul>
     </nav>
     {% block content %}{% endblock %}
     <footer class="footer">
-        <div>
-            <strong>Whats-On-Netflix &copy; 2025</strong> &mdash; Created by <span style="color:#e50914;">Harkirat Kaur</span><br>
-            <span class="footer-tagline">Visualize Netflix. Discover more.</span>
+        <div class="footer-inner">
+            <div class="footer-brand">WHATS-ON-<span>NETFLIX</span></div>
+            <div class="footer-copy">© 2025 Harkirat Kaur &mdash; <em>Visualize Netflix. Discover more.</em></div>
         </div>
     </footer>
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
 </body>
 </html>
