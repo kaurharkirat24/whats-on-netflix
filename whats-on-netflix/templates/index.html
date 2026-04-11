@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="landing">
+    <div class="landing-bg"></div>
+    <div class="landing-content">
+        <div class="landing-left">
+            <div class="eyebrow">
+                <span class="eyebrow-dot"></span>
+                Data Analytics Project
+            </div>
+            <h1 class="hero-title">
+                <span class="hero-line-white">WHATS ON</span>
+                <span class="hero-line-red">NETFLIX</span>
+            </h1>
+            <p class="hero-sub">Turn 8,800+ titles into visual stories. Explore genre trends, country breakdowns, content ratings, and release patterns — all interactive.</p>
+            <div class="hero-cta">
+                <a href="/dashboard" class="btn-primary">Explore Dashboard</a>
+                <a href="/dashboard#search" class="btn-ghost">Search Titles</a>
+            </div>
+            <div class="kpi-row" id="kpi-row">
+                <div class="kpi"><span class="kpi-num" id="k-total">—</span><span class="kpi-label">Titles</span></div>
+                <div class="kpi"><span class="kpi-num" id="k-countries">—</span><span class="kpi-label">Countries</span></div>
+                <div class="kpi"><span class="kpi-num" id="k-span">—</span><span class="kpi-label">Years of data</span></div>
+                <div class="kpi"><span class="kpi-num" id="k-avg">—</span><span class="kpi-label">Avg movie (min)</span></div>
+            </div>
+        </div>
+        <div class="landing-right">
+            <div class="hero-chart-card">
+                <div class="chart-card-header">
+                    <span class="chart-card-dot red"></span>
+                    <span class="chart-card-dot dim"></span>
+                    <span class="chart-card-dot dim"></span>
+                    <span class="chart-card-label">Top Genres</span>
+                </div>
+                <div id="hero-chart" style="height:320px;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="landing-features">
+        <div class="feature-pill">📊 13 Interactive Charts</div>
+        <div class="feature-pill">🔍 Title Search &amp; Filter</div>
+        <div class="feature-pill">🌍 Country Insights</div>
+        <div class="feature-pill">📈 Trend Analysis</div>
+        <div class="feature-pill">🎬 8,800+ Titles</div>
+    </div>
+</section>
+
+<script>
+// Load KPIs
+fetch('/api/summary').then(r=>r.json()).then(d=>{
+    document.getElementById('k-total').textContent = d.total.toLocaleString();
+    document.getElementById('k-countries').textContent = d.countries;
+    document.getElementById('k-span').textContent = d.years_span + '+';
+    document.getElementById('k-avg').textContent = d.avg_movie_duration;
+});
+
+// Hero mini chart
+fetch('/api/top_genres?n=8').then(r=>r.json()).then(d=>{
+    const layout = {
+        paper_bgcolor:'transparent', plot_bgcolor:'transparent',
+        margin:{l:110,r:16,t:10,b:30},
+        xaxis:{color:'rgba(255,255,255,0.3)', gridcolor:'rgba(255,255,255,0.05)', tickfont:{size:10}},
+        yaxis:{color:'rgba(255,255,255,0.5)', tickfont:{size:10}, autorange:'reversed'},
+        font:{family:'DM Sans, sans-serif', color:'rgba(255,255,255,0.6)'},
+        showlegend:false,
+    };
+    const trace = {
+        type:'bar', orientation:'h',
+        x: d.counts, y: d.genres,
+        marker:{color:'#E50914', opacity:0.85},
+        hovertemplate:'%{y}: %{x} titles<extra></extra>',
+    };
+    Plotly.newPlot('hero-chart', [trace], layout, {responsive:true, displayModeBar:false});
+});
+</script>
+{% endblock %}

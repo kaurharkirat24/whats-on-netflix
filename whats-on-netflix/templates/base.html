@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whats-On-Netflix</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">WHATS-ON-<span>NETFLIX</span></div>
+        <ul class="nav-links">
+            <li><a href="/" id="nav-home">Home</a></li>
+            <li><a href="/dashboard" id="nav-dash">Analytics</a></li>
+            <li><a href="/dashboard#search" id="nav-search">Explore</a></li>
+            <li><a href="/about" id="nav-about">About</a></li>
+        </ul>
+    </nav>
+    {% block content %}{% endblock %}
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">WHATS-ON-<span>NETFLIX</span></div>
+            <div class="footer-copy">© 2025 Harkirat Kaur &mdash; <em>Visualize Netflix. Discover more.</em></div>
+        </div>
+    </footer>
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</body>
+</html>
